@@ -1,7 +1,8 @@
-功夫网站内容管理系统(GFCMS)，基于PHP+MySQLi的技术架构。
+## 功夫网站内容管理系统(GFCMS)，基于PHP+MySQLi的技术架构。
 
-GFCMS2.0定位于高安全、高性能、高扩展、高SEO、高傻瓜化。
+#### GFCMS2.0定位于高安全、高性能、高扩展、高SEO、高傻瓜化。
 
+```txt
 GFCMS2.0目录结构
 	|--control					控制器
 	|--model					模型
@@ -30,14 +31,18 @@ GFCMS2.0目录结构
 				|--view					视图
 		|--web					静态页面
 		|--upload					上传文件
+```
 
 
-GFCMS2.0简易模板引擎(共8个标签)
-1，{inc:header.htm}					包含模板
-2，{hook:header_before.htm}			模板钩子(方便插件修改模板)
-3，{php}{/php}						模板支持PHP代码 (不支持<??><?php?>的写法)
-4，{block:}{/block}					模板模块
-5，{loop:}{/loop}					数组遍历
-6，{if:} {else} {eleseif:} {/if}	逻辑判断
-7，{$变量}							显示变量
-8，{@$k+1}							显示逻辑变量 (用于运算时的输出，一般用的很少)
+**GFCMS2.0简易模板引擎(共8个标签)**
+
+标签|注释
+---|---
+{inc:header.htm}					|包含模板
+{hook:header_before.htm}			|模板钩子(方便插件修改模板)
+{php}{/php}						|模板支持PHP代码 (不支持<??><?php?>的写法)
+{block:}{/block}					|模板模块
+{loop:}{/loop}					|数组遍历
+{if:} {else} {eleseif:} {/if}	|逻辑判断
+{$变量}							|显示变量
+{@$k+1}							|显示逻辑变量 (用于运算时的输出，一般用的很少)
