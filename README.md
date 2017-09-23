@@ -38,11 +38,11 @@ GFCMS2.0目录结构
 
 标签|注释
 ---|---
-{inc:header.htm}					|包含模板
+{inc:header.htm}				|包含模板
 {hook:header_before.htm}			|模板钩子(方便插件修改模板)
-{php}{/php}						|模板支持PHP代码 (不支持<??><?php?>的写法)
-{block:}{/block}					|模板模块
+{php}{/php}					|模板支持PHP代码 (不支持<??><?php?>的写法)
+{block:}{/block}				|模板模块
 {loop:}{/loop}					|数组遍历
-{if:} {else} {eleseif:} {/if}	|逻辑判断
-{$变量}							|显示变量
-{@$k+1}							|显示逻辑变量 (用于运算时的输出，一般用的很少)
+{if:} {else} {eleseif:} {/if}			|逻辑判断
+{$变量}						|显示变量
+{@$k+1}						|显示逻辑变量 (用于运算时的输出，一般用的很少)
