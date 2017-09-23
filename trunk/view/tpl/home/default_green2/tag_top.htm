@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>{$gf[titles]}</title>
+	<meta name="keywords" content="{$gf[seo_keywords]}" />
+	<meta name="description" content="{$gf[seo_description]}" />
+	<link rel="shortcut icon" type="image/x-icon" href= "{$gf[webdir]}favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="{$gf[tpl]}css/global.css" />
+</head>
+
+{inc:header.htm}
+
+	<!--两列开始-->
+	<div class="cont cf">
+		<div class="m_l">
+			{block:taglist limit="1000"}
+			<div class="b1_top">
+				<div class="b1_tit">
+					<div class="ct_p"></div>
+					<div class="ct_c"><a href="{$gf[weburl]}">首页</a> &#187; 热门标签</div>
+					<div class="ct_n"></div>
+				</div>
+				<div class="b1_cont cf">
+					{loop:$data[list] $v}<a href="{$v[url]}">{$v[name]}({$v[count]})</a> &nbsp; {/loop}
+				</div>
+			</div>
+			{/block}
+		</div>
+
+		<div class="m_r">
+			{inc:right.htm}
+		</div>
+	</div>
+	<!--两列结束-->
+
+{inc:footer.htm}
+
+<script type="text/javascript" src="{$gf[webdir]}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$gf[tpl]}js/main.js"></script>
+</body>
+</html>

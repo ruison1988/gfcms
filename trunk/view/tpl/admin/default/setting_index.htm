@@ -1,0 +1,50 @@
+{inc:header.htm}
+<div class="m">
+	<div class="p">
+		<div class="cc">
+			<form action="http://{$C[hostname]}/index.php?u=setting-index-ajax-1" method="post">
+				<div class="tb_t">基本设置</div>
+				<table class="tb">
+					<tr>
+						<th class="th">站点标题</th>
+						<td class="col">{$input[webname]}</td>
+					</tr>
+					<tr>
+						<th class="th">站点域名</th>
+						<td class="col">{$input[webdomain]}</td>
+					</tr>
+					<tr>
+						<th class="th">所在目录</th>
+						<td class="col">{$input[webdir]}</td>
+					</tr>
+					<tr>
+						<th class="th">邮箱</th>
+						<td class="col">{$input[webmail]}</td>
+					</tr>
+					<tr>
+						<th class="th">统计代码</th>
+						<td class="col">{$input[tongji]}</td>
+					</tr>
+					<tr>
+						<th class="th">备案号</th>
+						<td class="col">{$input[beian]}</td>
+					</tr>
+					<tr>
+						<th class="th">关闭全站评论</th>
+						<td class="col"><input type="checkbox" name="dis_comment" value="1" {if:$input['dis_comment']} checked="checked"{/if}title="关闭全站的评论功能"></td>
+					</tr>
+
+					{hook:admin_setting_index_after.htm}
+
+				</table>
+				<div class="tb_b"><input type="submit" value="&#20445;&#23384;" class="but1" /></div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+gfAjax.submit("form:first");
+</script>
+</body>
+</html>

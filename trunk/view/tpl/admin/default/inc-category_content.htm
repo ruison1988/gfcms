@@ -1,0 +1,39 @@
+{if:empty($category_arr)}
+	<div class="sky warning bnote"><i></i><b>暂无分类</b></div>
+{else}
+	{loop:$category_arr $arr $mid}
+	<div class="category">
+		<dl class="cat_tit">
+			<dd class="cat_t_1">　{php} echo $mod_name[$mid];{/php}分类</dd>
+			<dd class="cat_t_2">分类别名</dd>
+			<dd class="cat_t_3">分类排序</dd>
+			<dd class="cat_t_4">内容数量</dd>
+		</dl>
+
+		{loop:$arr $v}
+		{php}
+			$v['prestr'] = str_repeat("　　", $v['pre']-1);
+			$v['url'] = $_ENV['_category_class']->category_url($v['cid'], $v['alias']);
+		{/php}
+		<dl class="cat_col" cid="{$v[cid]}" mid="{$v[mid]}" url="{$v[url]}">
+			<dd class="cat_c_1">
+				<div class="c_name" title="编号(cid): {$v[cid]}&#10;分类名称: {$v[name]}">
+					　{$v[prestr]}
+					{if:$v[mid] == 1}
+						<span class="mtype">单页</span>
+					{elseif:$v[type] == 1}
+						<span class="mtype type1">频道</span>
+					{else}
+						<span class="mtype">列表</span>
+					{/if}
+					{$v[name]}
+				</div>
+			</dd>
+			<dd class="cat_c_2"><div class="c_alias" title="{$v['alias']}">{$v['alias']}</div></dd>
+			<dd class="cat_c_3"><input name="orderby" value="{$v[orderby]}" type="number" class="inp wnum"></dd>
+			<dd class="cat_c_4">{if:$v[mid] != 1 && $v[type] != 1}{$v[count]}{/if}</dd>
+		</dl>
+		{/loop}
+	</div>
+	{/loop}
+{/if}

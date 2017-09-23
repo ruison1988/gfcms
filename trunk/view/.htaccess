@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+	Options +Includes +FollowSymLinks
+    RewriteEngine on
+	RewriteRule ^$ view/index.html
+	##如果 请求的文件路径 非具体文件
+    RewriteCond %{REQUEST_FILENAME} !-f
+	##则 匹配该内容的所有字符串 执行index.php/匹配内容
+    RewriteRule ^(.*)$ index.php/$1
+	##图片防盗链
+	RewriteCond %{HTTP_REFERER} !^$
+	RewriteCond %{HTTP_REFERER} !^http://(www\.)?wdt\.my\.com/.*$ [NC]
+	RewriteRule \.(gif|jpg|png)$ http://www.wdt.my.com/img/fangdaolian.gif [R=301,L]
+	##文件禁止访问
+	#RewriteCond %{REQUEST_URI} ^/\w+/.*(.ini|.php|.htm)$
+	#RewriteRule .? 404.php [L]
+	
+	##判断访问设备
+	RewriteCond %(HTTP_USER_AGENT) ^Lynx.*
+	RewriteRule ^(.*)$ phone/$1
+</IfModule>

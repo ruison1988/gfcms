@@ -1,0 +1,116 @@
+{inc:header.htm}
+
+<div class="m">
+	<div class="head">
+		<dl>
+			<dd class="on">主题管理</dd>
+			<dd>在线获取</dd>
+		</dl>
+	</div>
+
+	<div class="p c2">
+		<div class="cc" style="padding-top:0">
+			{if:!$themes}
+				<div class="sky warning bnote"><i></i><b>暂无主题</b></div>
+			{else}
+				{loop:$themes $v $k}
+				{php} $enable = ($k == $theme); {/php}
+				<div class="thm{if:$enable} thmon{/if}">
+					<div class="to">
+						<p class="tu" style="background:url(tpl/{$core}/{$k}/show.jpg)"></p>
+						<p class="full"><b>版本号：{$v[version]}</b><b>更新于：{$v[update]}</b>{$v[brief]}</p>
+					</div>
+					<h1>{$v[name]}({$k})</h1>
+					<p class="author">作者: <a target="_blank" href="{$v[authorurl]}">{$v[author]}</a></p>
+					<p class="gsm" theme="{$k}">
+						{if:$enable}<b>当前使用</b>{else}<a class="enable but2">启用</a><a class="del but2">删除</a>{/if}
+					</p>
+				</div>
+				{/loop}
+			{/if}
+		</div>
+		<div class="cc un" id="gfcms_app">
+			<div class="sky warning bnote"><i></i><b>玩命加载中<font id="loading">...</font></b></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+function load() {
+	$(".gsm>a").attr("href","javascript:;");
+
+	$(".thm").off("hover").hover(function(){
+		$(this).addClass("thm_x");
+	}, function(){
+		$(this).removeClass("thm_x");
+	});
+
+	$(".to").off("hover").hover(function(){
+		$(this).children(".tu").hide();
+		$(this).children(".full").show();
+	},function(){
+		$(this).children(".tu").show();
+		$(this).children(".full").hide();
+	});
+	//启用
+	$(".enable").off("click").click(function(){ enable($(this).parent().attr("theme")); });
+
+	//删除
+	$(".del").off("click").click(function(){
+		var theme = $(this).parent().attr("theme");
+		gfAjax.confirm("删除不可恢复，确定删除“<font color='red'>"+$(this).parent().parent().children("h1").html()+"</font>”？", function(){
+			gfAjax.postd("admin/theme/delete/ajax/1", {"theme" : theme}, function(data){
+				window.gfErr = true;
+				gfAjax.alert(data);
+				$(".ajaxtips u").click(function(){window.location.reload();});
+				if(window.gfData.err==0) setTimeout(function(){window.location.reload();}, 1000);
+			});
+		});
+	});
+}
+
+load();
+
+//在线获取
+$(".head dd:eq(1)").one("click", function() {
+	loading();
+	$.getScript("http://wdt.my.com/js/theme.js");
+});
+
+//在线安装
+function install_theme(dir) {
+	gfAjax.confirm("玩命下载 <font color='red'>"+dir+"</font> 中<font id='loading'>......</font>", function(){});
+	loading();
+	$("#okA").remove();
+
+	$.getScript("admin/theme/installTheme/dir/" + dir, function(){
+		clearInterval(int);
+		if(typeof err == 'number' && !err && $("#install_enable").length == 0) {
+			$("#noA").after('<a id="install_enable" class="but3" href="javascript:;">启用</a>');
+			$("#install_enable").click(function() { enable(dir); });
+		}
+		//只要在线安装过都重新加载一下
+		$(".head dd:eq(0)").click(function(){ window.location.reload(); });
+	});
+}
+
+//加载效果
+var int;
+function loading() {
+	var dot = '';
+	int = setInterval(function(){
+		dot += '.';
+		if(dot.length > 6) dot = '.';
+		$("#loading").html(dot);
+	}, 50);
+}
+
+// 启用
+function enable(theme) {
+	gfAjax.postd("admin/theme/enable/ajax/1", {"theme" : theme}, function(data){
+		gfAjax.alert(data);
+		if(window.gfData.err==0) setTimeout(function(){window.location.reload();}, 1000);
+	});
+}
+</script>
+</body>
+</html>

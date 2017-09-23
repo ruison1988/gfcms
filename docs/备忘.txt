@@ -1,0 +1,2 @@
+control 改为 controller
+web下的模板文件单独分离到根目录下的view
